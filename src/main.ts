@@ -19,11 +19,11 @@ export default class Application {
     }
 
     createVueApp(rootComponent: Component): App {
-        throw new Error('unimplements this method')
+        throw new Error('该方法必须由子类实现')
     }
 
     createRouter(routes: RouteRecordRaw[]): Router {
-        throw new Error('unimplements this method')
+        throw new Error('该方法必须由子类实现')
     }
 
     createStore(options: StoreOptions<any>) {
@@ -39,7 +39,6 @@ export default class Application {
     }
 
     async loadAsyncData(to: RouteLocationNormalized, actions: string[]) {
-        console.info('load', actions.join(','))
         await Promise.all(actions.map(item => this.store.dispatch(item, to)))
     }
 }

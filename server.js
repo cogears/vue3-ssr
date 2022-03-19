@@ -30,7 +30,7 @@ server.get('*', async (req, res) => {
             res.setHeader('Content-Type', 'text/html')
             res.send(html)
         } else {
-            res.status(404)
+            res.redirect('/')
         }
     } catch (e) {
         console.info('==========error=============')
@@ -39,6 +39,5 @@ server.get('*', async (req, res) => {
     }
 })
 
-console.log(`You can navigate to http://localhost:${process.argv[2]}`)
-
-server.listen(process.argv[2])
+server.listen(process.argv[2] || 80)
+console.log(`You can navigate to http://localhost:${process.argv[2] || 80}`)
