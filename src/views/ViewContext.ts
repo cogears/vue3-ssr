@@ -1,4 +1,4 @@
-import Application from "../main";
+import Application from "../Application";
 
 export default class ViewContext {
     private app: Application;

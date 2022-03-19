@@ -1,6 +1,6 @@
 import { Component, createSSRApp } from 'vue'
 import { createRouter, createWebHistory, RouteLocationNormalized, Router, RouteRecordRaw } from 'vue-router'
-import Application from './main'
+import Application from './Application'
 import './views/styles/base.scss'
 
 class ClientApplication extends Application {

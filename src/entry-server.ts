@@ -1,6 +1,6 @@
 import { Component, createSSRApp } from 'vue'
 import { createMemoryHistory, createRouter, Router, RouteRecordRaw } from 'vue-router'
-import Application from './main'
+import Application from './Application'
 
 class ServerApplication extends Application {
     createVueApp(rootComponent: Component) {
