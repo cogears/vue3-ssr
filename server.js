@@ -3,15 +3,17 @@ const resolve = require('path').join.bind(null, __dirname)
 const express = require('express')
 const { createProxyMiddleware } = require('http-proxy-middleware')
 const { renderToString } = require('@vue/server-renderer')
-const template = fs.readFileSync(resolve('dist/client/index.html'))
-const manifest = require('./dist/server/ssr-manifest.json')
-const appPath = resolve('dist/server', manifest['app.js'])
+const template = fs.readFileSync(resolve('dist/csr/index.html'))
+const manifest = require('./dist/ssr/ssr-manifest.json')
+const appPath = resolve('dist/ssr', manifest['app.js'])
 const createApp = require(appPath).default
+const serverRouter = require('./dist/server').default
 
 const server = express()
 server.use(require('compression')())
-server.use(require('serve-static')(resolve('dist/client'), { index: false }))
-server.use('/api', createProxyMiddleware({ target: 'http://api.server.com', changeOrigin: true }))
+server.use(require('serve-static')(resolve('dist/csr'), { index: false }))
+server.use(serverRouter)
+// server.use('/api', createProxyMiddleware({ target: 'http://api.server.com', changeOrigin: true }))
 server.get('*', async (req, res) => {
     console.info(req.method, req.originalUrl)
     if (!/^\//.test(req.originalUrl)) {

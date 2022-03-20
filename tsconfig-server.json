@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "strict": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "esModuleInterop": true,
     "importHelpers": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "removeComments": true,
     "experimentalDecorators": true,
+    "outDir": "./dist/server",
     "lib": [
       "esnext",
       "dom",
@@ -19,21 +20,19 @@
     ],
     "types": [
       "node",
-      "webpack-env"
     ],
     "baseUrl": ".",
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "types": [
+        "types"
       ]
     }
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "src/server/**/*.ts",
   ],
   "exclude": [
     "node_modules"

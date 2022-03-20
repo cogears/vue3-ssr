@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onMounted, reactive, } from 'vue';
-import { getStore } from '@/store';
+import { getStore } from '@/client/store';
+import { onMounted, reactive } from 'vue';
 
 const store = getStore();
 const state = reactive<{ list: string[] }>({

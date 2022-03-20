@@ -6,11 +6,15 @@ module.exports = {
     css: {
         loaderOptions: {
             scss: {
-                additionalData: `@import "src/views/styles/config.scss";`
+                additionalData: `@import "src/client/views/styles/config.scss";`
             },
         }
     },
     devServer: {
+        setupMiddlewares(middlewares) {
+            middlewares.unshift(require('./dist/server').default)
+            return middlewares
+        },
         proxy: {
             '/api': {
                 target: 'http://api.server.com',
@@ -33,7 +37,7 @@ module.exports = {
             webpackConfig
                 .entry('app')
                 .clear()
-                .add('./src/entry-client.ts')
+                .add('./src/client/entry-csr.ts')
             return
         }
 
@@ -41,7 +45,7 @@ module.exports = {
         webpackConfig
             .entry('app')
             .clear()
-            .add('./src/entry-server.ts')
+            .add('./src/client/entry-ssr.ts')
 
         // 这允许 webpack 以适合于 Node 的方式处理动态导入，
         // 同时也告诉 `vue-loader` 在编译 Vue 组件的时候抛出面向服务端的代码。

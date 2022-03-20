@@ -1,4 +1,4 @@
-import { LOAD_HOME } from '@/store';
+import { LOAD_HOME } from '@/client/store';
 export default {
     name: 'home',
     path: '/',
