@@ -1,17 +1,17 @@
 {
   "name": "@cogears/vue3-ssr",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "vue3 ssr tempalte",
   "scripts": {
-    "dev": "vue-cli-service serve",
-    "build:csr": "vue-cli-service build --dest dist/csr",
-    "build:ssr": "SSR=1 vue-cli-service build --dest dist/ssr",
+    "dev": "tsc -w -p tsconfig-server.json & vue-cli-service serve",
+    "build:csr": "vue-cli-service build",
+    "build:ssr": "SSR=1 vue-cli-service build",
     "build:server": "tsc -p tsconfig-server.json",
     "build": "npm run build:csr && npm run build:ssr && npm run build:server",
-    "serve": "node server 80"
+    "launch": "node launcher"
   },
   "dependencies": {
-    "@cogears/http-client": "^1.1.2",
+    "@cogears/http-client": "^1.1.4",
     "core-js": "^3.21.1",
     "vue": "^3.2.31",
     "vue-router": "^4.0.14",

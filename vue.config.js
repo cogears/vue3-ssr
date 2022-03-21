@@ -1,8 +1,12 @@
+const { defineConfig } = require('@vue/cli-service')
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const nodeExternals = require('webpack-node-externals')
 const webpack = require('webpack')
+const config = require('./launcher/config')
+const serverApi = require('./launcher/web-api-server')
 
-module.exports = {
+module.exports = defineConfig({
+    outputDir: process.env.SSR ? config.resolveSSR() : config.resolveCSR(),
     css: {
         loaderOptions: {
             scss: {
@@ -12,18 +16,10 @@ module.exports = {
     },
     devServer: {
         setupMiddlewares(middlewares) {
-            middlewares.unshift(require('./dist/server').default)
+            middlewares.unshift(serverApi(true))
             return middlewares
         },
-        proxy: {
-            '/api': {
-                target: 'http://api.server.com',
-                changeOrigin: true,
-                pathRewrite: {
-                    '^/api': '/'
-                },
-            }
-        }
+        proxy: config.httpProxy
     },
     chainWebpack: webpackConfig => {
         // 我们需要禁用 cache loader，否则客户端构建版本会从服务端构建版本使用缓存过的组件
@@ -79,4 +75,4 @@ module.exports = {
             })
         )
     }
-}
+})

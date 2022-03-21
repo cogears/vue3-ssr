@@ -13,4 +13,4 @@ RUN npm install
 RUN npm run build
 ENV HOST=0.0.0.0 NODE_ENV=production
 EXPOSE 8080
-CMD ["npm", "run", "serve"]
+CMD ["npm", "run", "launch"]
